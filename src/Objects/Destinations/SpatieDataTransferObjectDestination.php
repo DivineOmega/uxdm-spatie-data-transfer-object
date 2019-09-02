@@ -7,14 +7,37 @@ use DivineOmega\uxdm\Objects\DataRow;
 
 class SpatieDataTransferObjectDestination implements DestinationInterface
 {
+    /**
+     * @var string
+     */
+    private $dataTransferObjectClass;
+
+    /**
+     * @var string
+     */
+    private $dataTransferObjectCollectionClass;
+
+    public function __construct(string $dataTransferObjectClass, string $dataTransferObjectCollectionClass)
+    {
+        $this->dataTransferObjectClass = $dataTransferObjectClass;
+        $this->dataTransferObjectCollectionClass = $dataTransferObjectCollectionClass;
+    }
 
     public function putDataRows(array $dataRows): void
     {
-        // TODO: Implement putDataRows() method.
+        $items = [];
+
+        /** @var DataRow $dataRow */
+        foreach ($dataRows as $dataRow) {
+            $dataTransferObject = new $this->dataTransferObjectClass($dataRow->toArray());
+            $items[] = $dataTransferObject;
+        }
+
+        return new $this->dataTransferObjectCollectionClass($items);
+
     }
 
     public function finishMigration(): void
     {
-        // TODO: Implement finishMigration() method.
     }
 }
