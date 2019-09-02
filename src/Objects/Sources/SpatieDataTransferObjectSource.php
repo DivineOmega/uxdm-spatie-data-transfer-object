@@ -5,27 +5,15 @@ namespace DivineOmega\uxdm\Objects\Sources;
 use DivineOmega\uxdm\Interfaces\SourceInterface;
 use DivineOmega\uxdm\Objects\DataItem;
 use DivineOmega\uxdm\Objects\DataRow;
+use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\DataTransferObject\DataTransferObjectCollection;
 
-class SpatieDataTransferObjectSource implements SourceInterface
+class SpatieDataTransferObjectSource extends AssociativeArraySource implements SourceInterface
 {
-
-    public function getDataRows(int $page = 1, array $fieldsToRetrieve = []): array
+    public function __construct(DataTransferObjectCollection $collection)
     {
-        // TODO: Implement getDataRows() method.
-    }
+        $array = $collection->toArray();
 
-    public function countDataRows(): int
-    {
-        // TODO: Implement countDataRows() method.
-    }
-
-    public function countPages(): int
-    {
-        // TODO: Implement countPages() method.
-    }
-
-    public function getFields(): array
-    {
-        // TODO: Implement getFields() method.
+        parent::__construct($array);
     }
 }
