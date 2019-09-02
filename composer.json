@@ -14,7 +14,8 @@
         "php-coveralls/php-coveralls": "^2.0"
     },
     "require": {
-        "divineomega/uxdm": "^3.0.0"
+        "divineomega/uxdm": "^3.0.0",
+        "spatie/data-transfer-object": "^1.9"
     },
     "autoload": {
         "psr-4": {
