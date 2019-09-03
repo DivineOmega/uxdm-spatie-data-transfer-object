@@ -29,28 +29,48 @@ class SpatieDataTransferObjectDestination implements DestinationInterface
         /** @var DataRow $dataRow */
         foreach ($dataRows as $dataRow) {
 
+            $index = $this->findInCollection($dataRow);
+
             $newDataTransferObject = new $this->dataTransferObjectClass($dataRow->toArray());
 
-            $keyDataItems = $dataRow->getKeyDataItems();
+            if ($index === null) {
+                $this->dataTransferObjectCollection[] = $newDataTransferObject;
+            } else {
+                $this->dataTransferObjectCollection[$index] = $newDataTransferObject;
+            }
 
-            foreach ($this->dataTransferObjectCollection as $key => $dataTransferObject) {
-                $keyDataItemsFound = 0;
+        }
+    }
 
-                foreach ($keyDataItems as $keyDataItem) {
-                    $fieldName = $keyDataItem->fieldName;
-                    if (isset($dataTransferObject->$fieldName) && $dataTransferObject->$fieldName === $keyDataItem->value) {
-                        $keyDataItemsFound++;
-                    }
-                }
+    /**
+     * Attempts to locate an existing data transfer object in the data transfer object collection
+     * that matches the key data items of the passed data row.
+     *
+     * If found, its index within the collection is returned.
+     *
+     * @param DataRow $dataRow
+     * @return int|null
+     */
+    private function findInCollection(DataRow $dataRow): ?int
+    {
+        $keyDataItems = $dataRow->getKeyDataItems();
 
-                if ($keyDataItemsFound === count($keyDataItems)) {
-                    $this->dataTransferObjectCollection[$key] = $newDataTransferObject;
-                    continue 2;
+        foreach ($this->dataTransferObjectCollection as $index => $dataTransferObject) {
+            $keyDataItemsFound = 0;
+
+            foreach ($keyDataItems as $keyDataItem) {
+                $fieldName = $keyDataItem->fieldName;
+                if (isset($dataTransferObject->$fieldName) && $dataTransferObject->$fieldName === $keyDataItem->value) {
+                    $keyDataItemsFound++;
                 }
             }
 
-            $this->dataTransferObjectCollection[] = $newDataTransferObject;
+            if ($keyDataItemsFound === count($keyDataItems)) {
+                return $index;
+            }
         }
+
+        return null;
     }
 
     public function finishMigration(): void
