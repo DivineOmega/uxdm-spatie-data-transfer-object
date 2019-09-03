@@ -28,8 +28,28 @@ class SpatieDataTransferObjectDestination implements DestinationInterface
     {
         /** @var DataRow $dataRow */
         foreach ($dataRows as $dataRow) {
-            $dataTransferObject = new $this->dataTransferObjectClass($dataRow->toArray());
-            $this->dataTransferObjectCollection[] = $dataTransferObject;
+
+            $newDataTransferObject = new $this->dataTransferObjectClass($dataRow->toArray());
+
+            $keyDataItems = $dataRow->getKeyDataItems();
+
+            foreach ($this->dataTransferObjectCollection as $key => $dataTransferObject) {
+                $keyDataItemsFound = 0;
+
+                foreach ($keyDataItems as $keyDataItem) {
+                    $fieldName = $keyDataItem->fieldName;
+                    if (isset($dataTransferObject->$fieldName) && $dataTransferObject->$fieldName === $keyDataItem->value) {
+                        $keyDataItemsFound++;
+                    }
+                }
+
+                if ($keyDataItemsFound === count($keyDataItems)) {
+                    $this->dataTransferObjectCollection[$key] = $newDataTransferObject;
+                    continue 2;
+                }
+            }
+
+            $this->dataTransferObjectCollection[] = $newDataTransferObject;
         }
     }
 
