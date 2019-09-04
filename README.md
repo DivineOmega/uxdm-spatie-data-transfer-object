@@ -20,6 +20,29 @@ The UXDM Spatie Data Transfer Object source allows you to source data from a Spa
 
 ### Creating
 
+To create a new Spatie Data Transfer Object source, you must provide it with a populated Spatie Data Transfer Object 
+Collection.
+
+The following example creates a Spatie Data Transfer Object source object, using a collection of users data transfer 
+objects.
+
+```php
+$users = new UserDTOCollection([
+    new UserDTO([
+        'id' => 1,
+        'name' => 'Picard`',
+        'email' => 'picard@enterprise-d.com',
+    ]),
+    new UserDTO([
+        'id' => 2,
+        'name' => 'Janeway',
+        'email' => 'janeway@voyager.com',
+    ])
+]);
+
+$spatieDataTransferObjectSource = new SpatieDataTransferObjectSource($users);
+```
+
 ### Assigning to migrator
 
 To use the Spatie Data Transfer Object source as part of a UXDM migration, you must assign it to the migrator.
