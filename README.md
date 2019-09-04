@@ -59,6 +59,17 @@ The UXDM Spatie Data Transfer Object destination allows you to migrate data into
 
 ### Creating
 
+To create a new Spatie Data Transfer Object destination, you must provide it with a Spatie Data Transfer Object 
+Collection, and the class name of a Spatie Data Transfer Object.
+
+The following example creates a Spatie Data Transfer Object destination object, using an empty collection, and the name
+of a user data transfer object class.
+
+```php
+$users = new UserDTOCollection();
+$spatieDataTransferObjectDestination = new SpatieDataTransferObjectDestination($users, UserDTO::class);
+```
+
 ### Assigning to migrator
 
 To use the Spatie Data Transfer Object destination as part of a UXDM migration, you must assign it to the migrator. 
