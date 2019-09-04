@@ -6,6 +6,9 @@
 The UXDM Spatie Data Transfer Object package provides a UXDM source and destination for Data Transfer Objects
 that are created using the [Spatie Data Transfer Object package](https://github.com/spatie/data-transfer-object).
 
+If you have not used UXDM before to migrate your data, visit the 
+[UXDM GitHub repository](https://github.com/divineomega/uxdm) to learn more.
+
 ## Installation
 
 To install the UXDM Spatie Data Transfer Object package, just run the following composer command.
