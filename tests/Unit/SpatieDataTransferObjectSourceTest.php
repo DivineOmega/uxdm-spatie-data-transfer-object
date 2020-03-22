@@ -1,6 +1,7 @@
 <?php
 
-use DivineOmega\uxdm\Objects\Sources\EloquentSource;
+namespace DivineOmega\uxdm\Tests;
+
 use DivineOmega\uxdm\Objects\Sources\SpatieDataTransferObjectSource;
 use DivineOmega\uxdm\TestClasses\SpatieDataTransferObject\UserDTO;
 use DivineOmega\uxdm\TestClasses\SpatieDataTransferObject\UserDTOCollection;

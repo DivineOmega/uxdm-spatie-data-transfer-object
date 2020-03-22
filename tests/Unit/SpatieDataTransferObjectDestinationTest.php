@@ -1,10 +1,10 @@
 <?php
 
+namespace DivineOmega\uxdm\Tests;
+
 use DivineOmega\uxdm\Objects\DataItem;
 use DivineOmega\uxdm\Objects\DataRow;
-use DivineOmega\uxdm\Objects\Destinations\EloquentDestination;
 use DivineOmega\uxdm\Objects\Destinations\SpatieDataTransferObjectDestination;
-use DivineOmega\uxdm\TestClasses\Eloquent\User;
 use DivineOmega\uxdm\TestClasses\SpatieDataTransferObject\UserDTO;
 use DivineOmega\uxdm\TestClasses\SpatieDataTransferObject\UserDTOCollection;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +21,7 @@ final class SpatieDataTransferObjectDestinationTest extends TestCase
 
     private function createDataRows()
     {
-        $faker = Faker\Factory::create();
+        $faker = \Faker\Factory::create();
 
         $dataRows = [];
 
@@ -42,7 +42,7 @@ final class SpatieDataTransferObjectDestinationTest extends TestCase
 
     private function alterDataRows(array $dataRows)
     {
-        $faker = Faker\Factory::create();
+        $faker = \Faker\Factory::create();
 
         foreach ($dataRows as $dataRow) {
             $dataItem = $dataRow->getDataItemByFieldName('email');
