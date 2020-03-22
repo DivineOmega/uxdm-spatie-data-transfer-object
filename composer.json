@@ -24,7 +24,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DivineOmega\\uxdm\\TestClasses\\": "tests/Unit/includes/TestClasses/"
+            "DivineOmega\\uxdm\\TestClasses\\": "tests/Unit/includes/TestClasses/",
+            "DivineOmega\\uxdm\\Tests\\": "tests/Unit"
         }
     },
     "license": "LGPL-3.0-only"
